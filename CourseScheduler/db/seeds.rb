@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Course.delete_all
+
+Course.create(courseName: 'Operating Systems Principles', description: '', CourseNumber: '519')
+Course.create(courseName: 'Database Management Systems 1', description: '', CourseNumber: '578')
+Course.create(courseName: 'Advanced Data Structures', description: '', CourseNumber: '600')
