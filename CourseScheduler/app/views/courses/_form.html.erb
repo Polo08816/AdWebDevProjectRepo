@@ -1,25 +1,55 @@
-<%= form_for(@course) do |f| %>
-  <% if @course.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
+<%= form_for @course, :html => { :class => "form-horizontal course" } do |f| %>
 
-      <ul>
-      <% @course.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% if @course.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @course.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :Course %><br>
-    <%= f.text_area :Course %>
+  <div class="form-group">
+    <%= f.label :courseName, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :courseName, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:courseName) %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+  <div class="form-group">
+    <%= f.label :description, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :description, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:description) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <%= f.label :courseNumber, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :courseNumber, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:courseNumber) %>
   </div>
+  <div class="form-group">
+    <%= f.label :department, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :department, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:department) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                courses_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
 <% end %>
