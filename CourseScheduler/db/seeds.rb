@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Course.delete_all
 
-Course.create(courseName: 'Operating Systems Principles', description: '', CourseNumber: '519')
-Course.create(courseName: 'Database Management Systems 1', description: '', CourseNumber: '578')
-Course.create(courseName: 'Advanced Data Structures', description: '', CourseNumber: '600')
-Course.create(courseName: 'Computer Networks', description: '', CourseNumber: '650')
+Course.create(courseName: 'Operating Systems Principles', description: '', courseNumber: '519')
+Course.create(courseName: 'Database Management Systems 1', description: '', courseNumber: '578')
+Course.create(courseName: 'Advanced Data Structures', description: '', courseNumber: '600')
+Course.create(courseName: 'Computer Networks', description: '', courseNumber: '650')

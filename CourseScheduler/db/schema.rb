@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 20160405211821) do
     t.text     "description"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.integer  "CourseNumber"
-    t.string   "Department"
+    t.integer  "courseNumber"
+    t.string   "department"
   end
 
   create_table "users", force: :cascade do |t|
