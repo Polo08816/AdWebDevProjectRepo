@@ -1,0 +1,43 @@
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th><%= model_class.human_attribute_name(:userType) %></th>
+    <th><%= model_class.human_attribute_name(:email) %></th>
+    <th><%= model_class.human_attribute_name(:firstName) %></th>
+    <th><%= model_class.human_attribute_name(:lastName) %></th>
+    <th><%= model_class.human_attribute_name(:streetAddr) %></th>
+    <th><%= model_class.human_attribute_name(:phoneNum) %></th>
+
+    <th><%=t '.actions', :default => t("helpers.actions") %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% User.all.each do |user| %>
+      <tr>
+        <td><%= user.userType %></td>
+        <td><%= user.email %></td>
+        <td><%= user.firstName %></td>
+        <td><%= user.lastName %></td>
+        <td><%= user.streetAddr %></td>
+        <td><%= user.phoneNum %></td>
+
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_user_path(user), :class => 'btn btn-default btn-xs' %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<br>
+</br>
+<br>
+</br>
+<div>
+  <%= link_to "Log Out", destroy_user_session_path, method: :delete,
+              :class => 'btn btn-danger'  %>
+</div>
