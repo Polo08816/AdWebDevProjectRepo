@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :courses, :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  root 'users#index'
+  root 'courses#index'
   #map.connect 'users/:id/add_course_path', :controller => "courses", :action => "index"
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
