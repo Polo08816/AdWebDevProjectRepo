@@ -1,16 +1,20 @@
 <%- model_class = User -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %> Information</h1>
+</div>
+
+<div class="page-header">
+  <h2><%=t '.title', :default => "My Account" %></h2>
 </div>
 <table class="table table-striped">
   <thead>
   <tr>
-    <th><%= model_class.human_attribute_name(:userType) %></th>
+    <th><%= model_class.human_attribute_name(:user_type) %></th>
     <th><%= model_class.human_attribute_name(:email) %></th>
-    <th><%= model_class.human_attribute_name(:firstName) %></th>
-    <th><%= model_class.human_attribute_name(:lastName) %></th>
-    <th><%= model_class.human_attribute_name(:streetAddr) %></th>
-    <th><%= model_class.human_attribute_name(:phoneNum) %></th>
+    <th><%= model_class.human_attribute_name(:first_name) %></th>
+    <th><%= model_class.human_attribute_name(:last_name) %></th>
+    <th><%= model_class.human_attribute_name(:street_address) %></th>
+    <th><%= model_class.human_attribute_name(:phone_number) %></th>
 
     <th><%=t '.actions', :default => t("helpers.actions") %></th>
   </tr>
@@ -18,12 +22,12 @@
   <tbody>
   <% User.all.each do |user| %>
       <tr>
-        <td><%= user.userType %></td>
+        <td><%= user.user_type %></td>
         <td><%= user.email %></td>
-        <td><%= user.firstName %></td>
-        <td><%= user.lastName %></td>
-        <td><%= user.streetAddr %></td>
-        <td><%= user.phoneNum %></td>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.street_address %></td>
+        <td><%= user.phone_number %></td>
 
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -33,6 +37,24 @@
   <% end %>
   </tbody>
 </table>
+
+<div class="page-header">
+  <h2><%=t '.title', :default => "Schedule" %></h2>
+</div>
+<div>
+  <%= link_to "Add Class", '/courses/schedule_add', method: :schedule_add,
+      :class => 'btn btn-default btn-xs'  %>
+  <%= link_to "Remove Class", '/courses/remove', method: :schedule_remove,
+      :class => 'btn btn-default btn-xs'  %>
+</div>
+
+
+<div class="page-header">
+  <h2><%=t '.title', :default => "Other" %></h2>
+</div>
+
+
+
 <br>
 </br>
 <br>

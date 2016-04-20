@@ -13,5 +13,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  has_and_belongs_to_many :courses
+#  validates :email, presence: true
+#  validates :phoneNum, numericality: {greater_than_or_equal_to: 100000000}
+#  validates :phoneNum, numericality: {less_than_or_equal_to: 9999999999}
+
   TYPES = ['Student', 'Instructor']
 end

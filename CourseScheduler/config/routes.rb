@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
   get 'users/edit'
+  post 'courses/schedule_add'
+  get 'users/add_course'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
   resources :courses, :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  root 'courses#index'
+#  root 'courses#index'
+  root 'users#index'
   #map.connect 'users/:id/add_course_path', :controller => "courses", :action => "index"
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

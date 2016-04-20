@@ -21,6 +21,10 @@ class CoursesController < ApplicationController
   def edit
   end
 
+  def schedule_add
+    @courses = Course.all
+  end
+
   # POST /courses
   # POST /courses.json
   def create
@@ -64,8 +68,8 @@ class CoursesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
-#-      @course = Course.find(params[:id])
       @course = Course.find(params[:id])
+#-      @course = current_course
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
