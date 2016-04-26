@@ -11,6 +11,7 @@
     <th><%= model_class.human_attribute_name(:description) %></th>
     <th><%= model_class.human_attribute_name(:courseNumber) %></th>
     <th><%= model_class.human_attribute_name(:department) %></th>
+    <th><%= model_class.human_attribute_name(:prerequisiteCourseNumber) %></th>
     <th><%=t '.actions', :default => t("helpers.actions") %></th>
   </tr>
   </thead>
@@ -23,6 +24,7 @@
             <td><%= course.description %></td>
             <td><%= course.courseNumber %></td>
             <td><%= course.department %></td>
+            <td><%= course.prerequisiteCourseNumber %></td>
             <td>
               <%= link_to t('.select', :default => t("helpers.links.select")),
                           { :controller => "users", :action => "add_course", :id => course.id }, :class => 'btn btn-default btn-xs' %>

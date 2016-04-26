@@ -12,6 +12,8 @@
   <dd><%= @course.courseNumber %></dd>
   <dt><strong><%= model_class.human_attribute_name(:department) %>:</strong></dt>
   <dd><%= @course.department %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:prerequisiteCourseNumber) %>:</strong></dt>
+  <dd><%= @course.prerequisiteCourseNumber %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
