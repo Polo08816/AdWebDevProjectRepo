@@ -19,5 +19,5 @@ class User < ActiveRecord::Base
 #  validates :phoneNum, numericality: {less_than_or_equal_to: 9999999999}
 
   TYPES = ['Student', 'Instructor']
-  COMPLETED = ['Yes', 'No']
+  COMPLETED = ['Pass', 'Fail', "In Progress"]
 end

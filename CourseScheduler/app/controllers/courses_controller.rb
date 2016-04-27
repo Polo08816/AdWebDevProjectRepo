@@ -15,6 +15,12 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def schedule_course
+    @schedule = Schedule.all
+  end
+
+  # GET /courses/1
+  # GET /courses/1.json
+  def schedule_remove
   end
 
   # GET /courses/new
