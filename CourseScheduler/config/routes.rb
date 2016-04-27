@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'users/edit'
   post 'courses/schedule_add'
   get 'users/add_course'
+  get 'courses/schedule_course'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
   resources :courses, :users

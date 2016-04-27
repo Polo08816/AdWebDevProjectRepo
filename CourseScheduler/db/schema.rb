@@ -11,24 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426205618) do
+ActiveRecord::Schema.define(version: 20160426230641) do
 
   create_table "courses", force: :cascade do |t|
-    t.text     "courseName"
+    t.text     "course_name"
     t.text     "description"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "courseNumber"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "course_number"
     t.string   "department"
-    t.integer  "prerequisiteCourseNumber"
+    t.integer  "prerequisite_course_number"
   end
+
+  add_index "courses", ["course_number", "department"], name: "index_courses_on_course_number_and_department", unique: true
 
   create_table "schedules", id: false, force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "course_id"
     t.string   "semester"
     t.integer  "year"
-    t.boolean  "complete"
+    t.string   "complete"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

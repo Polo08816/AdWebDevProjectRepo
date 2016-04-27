@@ -20,7 +20,7 @@
   </tr>
   </thead>
   <tbody>
-  <% User.all.each do |user| %>
+  <% @user.each do |user| %>
       <tr>
         <td><%= user.user_type %></td>
         <td><%= user.email %></td>
@@ -44,17 +44,19 @@
 <table class="table table-striped">
   <thead>
   <tr>
-    <th><%= model_class.human_attribute_name(:courseName) %></th>
+    <th><%= model_class.human_attribute_name(:course_name) %></th>
     <th><%= model_class.human_attribute_name(:semester) %></th>
     <th><%= model_class.human_attribute_name(:year) %></th>
+    <th><%= model_class.human_attribute_name(:complete) %></th>
   </tr>
   </thead>
   <tbody>
-  <% Array(Schedule.find_by(:user_id=>current_user.id)).each do |schedule| %>
+  <% @schedule.each do |schedule| %>
       <tr>
-        <td><%= Course.find(schedule.course_id).courseName %></td>
+        <td><%= link_to Course.find(schedule.course_id).course_name, controller: "courses", action: "schedule_course", id: schedule.course_id %></td>
         <td><%= schedule.semester %></td>
         <td><%= schedule.year %></td>
+        <td><%= schedule.complete %></td>
       </tr>
   <% end %>
   </tbody>

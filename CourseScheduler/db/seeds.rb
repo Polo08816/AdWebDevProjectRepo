@@ -8,13 +8,13 @@
 Course.delete_all
 
 # Core classes
-Course.create(courseName: 'Operating Systems Principles', description: '', courseNumber: '519', department: "COSC")
-Course.create(courseName: 'Database Management Systems 1', description: '', courseNumber: '578', department: "COSC")
-Course.create(courseName: 'Advanced Data Structures', description: '', courseNumber: '600', department: "COSC")
-Course.create(courseName: 'Computer Networks', description: '', courseNumber: '650', department: "COSC")
+Course.create(course_name: 'Operating Systems Principles', description: '', course_number: '519', department: "COSC")
+Course.create(course_name: 'Database Management Systems 1', description: '', course_number: '578', department: "COSC")
+Course.create(course_name: 'Advanced Data Structures', description: '', course_number: '600', department: "COSC")
+Course.create(course_name: 'Computer Networks', description: '', course_number: '650', department: "COSC")
 
 # Elective classes
-Course.create(courseName: 'Software Project Management', description: '', courseNumber: '609', department: "COSC")
-Course.create(courseName: 'Software Engineering', description: '', courseNumber: '612', department: "COSC", prerequisiteCourseNumber: '600')
-Course.create(courseName: 'Advanced Web Development', description: '', courseNumber: '617', department: "COSC", prerequisiteCourseNumber: '600')
-Course.create(courseName: 'Computer Vision and Image Processing', description: '', courseNumber: '602', department: "COSC")
+Course.create(course_name: 'Software Project Management', description: '', course_number: '609', department: "COSC")
+Course.create(course_name: 'Software Engineering', description: '', course_number: '612', department: "COSC", prerequisite_course_number: '600')
+Course.create(course_name: 'Advanced Web Development', description: '', course_number: '617', department: "COSC", prerequisite_course_number: '600')
+Course.create(course_name: 'Computer Vision and Image Processing', description: '', course_number: '602', department: "COSC")

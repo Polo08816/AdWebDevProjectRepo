@@ -16,11 +16,11 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :courseName, :class => 'control-label col-lg-2' %>
+    <%= f.label :course_name, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :courseName, :class => 'form-control' %>
+      <%= f.text_field :course_name, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:courseName) %>
+    <%=f.error_span(:course_name) %>
   </div>
   <div class="form-group">
     <%= f.label :description, :class => 'control-label col-lg-2' %>
@@ -30,11 +30,11 @@
     <%=f.error_span(:description) %>
   </div>
   <div class="form-group">
-    <%= f.label :courseNumber, :class => 'control-label col-lg-2' %>
+    <%= f.label :course_number, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :courseNumber, :class => 'form-control' %>
+      <%= f.text_field :course_number, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:courseNumber) %>
+    <%=f.error_span(:course_number) %>
   </div>
   <div class="form-group">
     <%= f.label :department, :class => 'control-label col-lg-2' %>
@@ -42,6 +42,13 @@
       <%= f.text_field :department, :class => 'form-control' %>
     </div>
     <%=f.error_span(:department) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :prerequisite_course_number, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :prerequisite_course_number, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:prerequisite_course_number) %>
   </div>
 
   <div class="form-group">

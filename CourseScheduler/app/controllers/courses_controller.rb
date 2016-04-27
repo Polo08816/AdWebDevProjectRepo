@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, :schedule_course]
 
   # GET /courses
   # GET /courses.json
@@ -10,6 +10,11 @@ class CoursesController < ApplicationController
   # GET /courses/1
   # GET /courses/1.json
   def show
+  end
+
+  # GET /courses/1
+  # GET /courses/1.json
+  def schedule_course
   end
 
   # GET /courses/new
@@ -74,6 +79,6 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:courseName, :description, :courseNumber,:department)
+      params.require(:course).permit(:course_name, :description, :course_number, :department, :prerequisite_course_number)
     end
 end

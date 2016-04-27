@@ -7,11 +7,11 @@
   <thead>
   <tr>
     <th><%= model_class.human_attribute_name(:id) %></th>
-    <th><%= model_class.human_attribute_name(:courseName) %></th>
+    <th><%= model_class.human_attribute_name(:course_name) %></th>
     <th><%= model_class.human_attribute_name(:description) %></th>
-    <th><%= model_class.human_attribute_name(:courseNumber) %></th>
+    <th><%= model_class.human_attribute_name(:course_number) %></th>
     <th><%= model_class.human_attribute_name(:department) %></th>
-    <th><%= model_class.human_attribute_name(:prerequisiteCourseNumber) %></th>
+    <th><%= model_class.human_attribute_name(:prerequisite_course_number) %></th>
     <th><%=t '.actions', :default => t("helpers.actions") %></th>
   </tr>
   </thead>
@@ -20,11 +20,11 @@
       <% @courses.each do |course| %>
           <tr>
             <td><%= course.id %></td>
-            <td><%= course.courseName %></td>
+            <td><%= course.course_name %></td>
             <td><%= course.description %></td>
-            <td><%= course.courseNumber %></td>
+            <td><%= course.course_number %></td>
             <td><%= course.department %></td>
-            <td><%= course.prerequisiteCourseNumber %></td>
+            <td><%= course.prerequisite_course_number %></td>
             <td>
               <%= link_to t('.select', :default => t("helpers.links.select")),
                           { :controller => "users", :action => "add_course", :id => course.id }, :class => 'btn btn-default btn-xs' %>
