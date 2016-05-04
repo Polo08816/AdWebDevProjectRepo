@@ -4,8 +4,15 @@ class UsersController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @user = User.where(id: current_user.id)
-    @schedule = Schedule.where(user_id: current_user.id)
+    tmp_user = User.find(current_user.id)
+    if (tmp_user.user_type == "Admin")
+      @user = User.all
+      @course = Course.all
+      @schedule = Schedule.where(user_id: current_user.id, complete: "In Progress")
+    else
+      @user = User.where(id: current_user.id)
+      @schedule = Schedule.where(user_id: current_user.id, complete: "In Progress")
+    end
   end
 
   def edit

@@ -1,0 +1,98 @@
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %> Information</h1>
+</div>
+
+<div class="page-header">
+  <h2><%=t '.title', :default => "My Account" %></h2>
+</div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th><%= model_class.human_attribute_name(:user_type) %></th>
+    <th><%= model_class.human_attribute_name(:email) %></th>
+    <th><%= model_class.human_attribute_name(:first_name) %></th>
+    <th><%= model_class.human_attribute_name(:last_name) %></th>
+    <th><%= model_class.human_attribute_name(:street_address) %></th>
+    <th><%= model_class.human_attribute_name(:phone_number) %></th>
+
+    <th><%=t '.actions', :default => t("helpers.actions") %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @user.each do |user| %>
+      <tr>
+        <td><%= user.user_type %></td>
+        <td><%= user.email %></td>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.street_address %></td>
+        <td><%= user.phone_number %></td>
+
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_user_path(user), :class => 'btn btn-default btn-xs' %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<div class="page-header">
+  <h2><%=t '.title', :default => "Schedule" %></h2>
+</div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th><%= model_class.human_attribute_name(:course_name) %></th>
+    <th><%= model_class.human_attribute_name(:description) %></th>
+    <th><%= model_class.human_attribute_name(:course_number) %></th>
+    <th><%= model_class.human_attribute_name(:department) %></th>
+    <th><%= model_class.human_attribute_name(:prerequisite_course_number) %></th>
+    <th><%=t '.actions', :default => t("helpers.actions") %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @course.each do |course| %>
+      <tr>
+        <td><%= link_to course.course_name, controller: "courses", action: "schedule_course", id: schedule.course_id %></td>
+        <td><%#= link_to course.id, course_path(course) %></td>
+        <td><%= course.description %></td>
+        <td><%= course.course_number %></td>
+        <td><%= course.department %></td>
+        <td><%= course.prerequisite_course_number %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_course_path(course), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      course_path(course),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<div>
+  <%= link_to "Add Class", '/courses/schedule_add', method: :schedule_add,
+              :class => 'btn btn-default btn-xs'  %>
+  <%= link_to "Remove Class", '/courses/schedule_remove', method: :schedule_remove,
+              :class => 'btn btn-default btn-xs'  %>
+</div>
+
+
+<div class="page-header">
+  <h2><%=t '.title', :default => "Other" %></h2>
+</div>
+
+
+
+<br>
+</br>
+<br>
+</br>
+<div>
+  <%= link_to "Log Out", destroy_user_session_path, method: :delete,
+              :class => 'btn btn-danger'  %>
+</div>
