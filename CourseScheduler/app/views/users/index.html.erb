@@ -4,59 +4,36 @@
 </div>
 
 <div class="page-header">
-  <h2><%=t '.title', :default => "My Account" %></h2>
+  <h2><%=link_to t('.title', :default => "My Account"), "users/index" %></h2>
 </div>
 <table class="table table-striped">
   <thead>
   <tr>
-    <th><%= model_class.human_attribute_name(:user_type) %></th>
-    <th><%= model_class.human_attribute_name(:email) %></th>
-    <th><%= model_class.human_attribute_name(:first_name) %></th>
-    <th><%= model_class.human_attribute_name(:last_name) %></th>
-    <th><%= model_class.human_attribute_name(:street_address) %></th>
-    <th><%= model_class.human_attribute_name(:phone_number) %></th>
-
-    <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    <%= render :partial => "user_model", locals: {fparam: model_class} %>
   </tr>
   </thead>
   <tbody>
   <% @user.each do |user| %>
       <tr>
-        <td><%= user.user_type %></td>
-        <td><%= user.email %></td>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= user.street_address %></td>
-        <td><%= user.phone_number %></td>
-
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_user_path(user), :class => 'btn btn-default btn-xs' %>
-        </td>
+        <%= render :partial => "user_info", locals: {fparam: user} %>
       </tr>
   <% end %>
   </tbody>
 </table>
 
 <div class="page-header">
-  <h2><%=t '.title', :default => "Schedule" %></h2>
+  <h2><%=link_to t('.title', :default => "Schedule"), "users/schedule" %></h2>
 </div>
 <table class="table table-striped">
   <thead>
   <tr>
-    <th><%= model_class.human_attribute_name(:course_name) %></th>
-    <th><%= model_class.human_attribute_name(:semester) %></th>
-    <th><%= model_class.human_attribute_name(:year) %></th>
-    <th><%= model_class.human_attribute_name(:complete) %></th>
+    <%= render :partial => "schedule_model", locals: {fparam: model_class} %>
   </tr>
   </thead>
   <tbody>
   <% @schedule.each do |schedule| %>
       <tr>
-        <td><%= link_to Course.find(schedule.course_id).course_name, controller: "courses", action: "schedule_course", id: schedule.course_id %></td>
-        <td><%= schedule.semester %></td>
-        <td><%= schedule.year %></td>
-        <td><%= schedule.complete %></td>
+        <%= render :partial => "schedule_info", locals: {fparam: schedule} %>
       </tr>
   <% end %>
   </tbody>
@@ -67,12 +44,6 @@
   <%= link_to "Remove Class", '/courses/schedule_remove', method: :schedule_remove,
       :class => 'btn btn-default btn-xs'  %>
 </div>
-
-
-<div class="page-header">
-  <h2><%=t '.title', :default => "Other" %></h2>
-</div>
-
 
 
 <br>

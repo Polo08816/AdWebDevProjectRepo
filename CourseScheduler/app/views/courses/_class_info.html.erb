@@ -1,0 +1,6 @@
+<td><%= link_to fparam.course_name, course_path(fparam) %></td>
+<td><%= fparam.description %></td>
+<td><%= fparam.course_number %></td>
+<td><%= fparam.department %></td>
+<td><%= fparam.prerequisite_course_number %></td>
+<td><%= Schedule.where(course_id: fparam.id).size %></td>

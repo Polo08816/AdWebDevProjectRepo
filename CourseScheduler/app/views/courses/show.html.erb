@@ -17,11 +17,14 @@
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
-              courses_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_course_path(@course), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              course_path(@course),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+            courses_path, :class => 'btn btn-default'  %>
+
+<% if User.where(id: current_user.id, user_type: "Admin").any? %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_course_path(@course), :class => 'btn btn-default' %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                course_path(@course),
+                :method => 'delete',
+                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                :class => 'btn btn-danger' %>
+<% end %>

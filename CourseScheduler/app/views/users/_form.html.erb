@@ -15,13 +15,15 @@
         </div>
     <% end %>
 
-    <div class="form-group">
-      <%= f.label :user_type, :class => 'control-label col-lg-2' %>
-      <div class="col-lg-10">
-        <%= f.collection_select :user_type, User::TYPES, :to_s, :to_s, :include_blank =>false, :class => 'control-label col-lg-2' %>
-      </div>
-      <%=f.error_span(:user_type) %>
-    </div>
+    <% if User.where(id: current_user.id, user_type: "Admin").any? %>
+        <div class="form-group">
+          <%= f.label :user_type, :class => 'control-label col-lg-2' %>
+          <div class="col-lg-10">
+            <%= f.collection_select :user_type, User::TYPES, :to_s, :to_s, :include_blank =>false, :class => 'control-label col-lg-2' %>
+          </div>
+          <%=f.error_span(:user_type) %>
+        </div>
+    <% end %>
     <div class="form-group">
       <%= f.label :email, :class => 'control-label col-lg-2' %>
       <div class="col-lg-10">

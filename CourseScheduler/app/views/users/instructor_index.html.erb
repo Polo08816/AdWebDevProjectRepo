@@ -1,0 +1,43 @@
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => "Instructor Information" %></h1>
+</div>
+
+<div class="page-header">
+  <h2><%=link_to t('.title', :default => "My Account"), "/users/index" %></h2>
+</div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <%= render :partial => "users/user_model", locals: {fparam: model_class} %>
+  </tr>
+  </thead>
+  <tbody>
+  <% @user.each do |user| %>
+      <tr>
+        <%= render :partial => "user_info", locals: {fparam: user} %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<div class="page-header">
+  <h2><%=t '.title', :default => "Courses" %></h2>
+</div>
+
+<div id="instructor">
+    <%= render :partial => "instructor" %>
+</div>
+<div>
+  <%= link_to "Update", "instructor_update", :remote => true, :class => 'btn btn-primary'  %>
+</div>
+
+
+<br>
+</br>
+<br>
+</br>
+<div>
+  <%= link_to "Log Out", destroy_user_session_path, method: :delete,
+      :class => 'btn btn-danger'  %>
+</div>

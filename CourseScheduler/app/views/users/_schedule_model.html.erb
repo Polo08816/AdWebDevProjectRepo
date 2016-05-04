@@ -1,0 +1,10 @@
+<% if User.where(id: current_user.id, user_type: "Admin").any? %>
+    <th><%= fparam.human_attribute_name(:user_id) %></th>
+<% end %>
+<th><%= fparam.human_attribute_name(:course_name) %></th>
+<th><%= fparam.human_attribute_name(:semester) %></th>
+<th><%= fparam.human_attribute_name(:year) %></th>
+<th><%= fparam.human_attribute_name(:complete) %></th>
+<% if User.where(id: current_user.id, user_type: "Admin").any? %>
+    <th><%=t '.actions', :default => t("helpers.actions") %></th>
+<% end %>

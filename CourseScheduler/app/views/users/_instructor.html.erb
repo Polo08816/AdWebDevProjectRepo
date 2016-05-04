@@ -1,0 +1,15 @@
+<%- model_class = User -%>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <%= render :partial => "courses/class_model", locals: {fparam: model_class} %>
+  </tr>
+  </thead>
+  <tbody>
+    <% Course.where(instructor_id: current_user.id).each do |course| %>
+        <tr>
+          <%= render :partial => "/courses/class_info", locals: {fparam: course} %>
+        </tr>
+    <% end %>
+  </tbody>
+</table>

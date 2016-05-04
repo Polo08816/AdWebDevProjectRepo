@@ -1,0 +1,27 @@
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => "Schedule" %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <%= render :partial => "schedule_model", locals: {fparam: model_class} %>
+  </tr>
+  </thead>
+  <tbody>
+  <% @schedule.each do |schedule| %>
+      <tr>
+        <%= render :partial => "schedule_info", locals: {fparam: schedule} %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<% if !User.where(id: current_user.id, user_type: "Admin").any? %>
+    <div>
+      <%= link_to "Add Class", '/courses/schedule_add', method: :schedule_add,
+          :class => 'btn btn-default btn-xs'  %>
+      <%= link_to "Remove Class", '/courses/schedule_remove', method: :schedule_remove,
+          :class => 'btn btn-default btn-xs'  %>
+    </div>
+<% end %>

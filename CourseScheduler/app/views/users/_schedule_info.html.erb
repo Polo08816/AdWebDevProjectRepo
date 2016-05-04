@@ -1,0 +1,17 @@
+<% if User.where(id: current_user.id, user_type: "Admin").any? %>
+    <td><%= fparam.user_id %></td>
+<% end %>
+<td><%= link_to Course.find(fparam.course_id).course_name, controller: "courses", action: "schedule_course", id: fparam.course_id %></td>
+<td><%= fparam.semester %></td>
+<td><%= fparam.year %></td>
+<td><%= fparam.complete %></td>
+<% if User.where(id: current_user.id, user_type: "Admin").any? %>
+    <td>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                  "/courses/schedule_edit", :class => 'btn btn-default btn-xs' %>
+      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                  users_path, :method => 'schedule_delete',
+                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                  :class => 'btn btn-danger btn-xs' %>
+    </td>
+<% end %>

@@ -1,0 +1,19 @@
+<td><%= link_to fparam.course_name, course_path(fparam) %></td>
+<td><%= fparam.description %></td>
+<td><%= fparam.course_number %></td>
+<td><%= fparam.department %></td>
+<td><%= fparam.prerequisite_course_number %></td>
+<% if User.where(id: fparam.instructor_id).any? %>
+    <td><%= User.find(fparam.instructor_id).last_name %>, <%=User.find(fparam.instructor_id).first_name %></td>
+<% else %>
+    <td><%= "None" %></td>
+<% end %>
+<td>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_course_path(fparam), :class => 'btn btn-default btn-xs' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              course_path(fparam),
+              :method => :delete,
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-xs btn-danger' %>
+</td>

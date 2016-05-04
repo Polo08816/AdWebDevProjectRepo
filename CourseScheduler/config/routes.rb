@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   post 'courses/schedule_add'
   get 'users/add_course'
   get 'courses/schedule_course'
+  get 'users/admin_index'
+  get 'users/schedule'
+  get 'users/instructor_index'
+  get 'users/instructor_update'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
   resources :courses, :users

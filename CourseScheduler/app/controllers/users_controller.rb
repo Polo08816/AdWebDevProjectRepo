@@ -8,16 +8,43 @@ class UsersController < ApplicationController
     if (tmp_user.user_type == "Admin")
       @user = User.all
       @course = Course.all
-      @schedule = Schedule.where(user_id: current_user.id, complete: "In Progress")
+      redirect_to "/users/admin_index"
+#      @schedule = Schedule.where(user_id: current_user.id, complete: "In Progress")
     else
       @user = User.where(id: current_user.id)
       @schedule = Schedule.where(user_id: current_user.id, complete: "In Progress")
+      if (tmp_user.user_type == "Instructor")
+        redirect_to "/users/instructor_index"
+      end
+    end
+  end
+
+  def admin_index
+  end
+
+  def instructor_index
+    @user = User.where(id: current_user.id)
+    @course = Course.all
+  end
+
+  def instructor_update
+    respond_to do |format|
+      format.html {redirect_to "/users/instructor_index"}
+      format.js {render :layout => false}
     end
   end
 
   def edit
   end
 
+  def schedule
+    tmp_user = User.find(current_user.id)
+    if (tmp_user.user_type == "Admin")
+      @schedule = Schedule.all
+    else
+      @schedule = Schedule.where(user_id: current_user.id, complete: "In Progress")
+    end
+  end
   # GET /users/1
   # GET /users/1.json
   def show
@@ -26,7 +53,7 @@ class UsersController < ApplicationController
   def add_course
     course = Course.find(params[:id])
     user = current_user
-    schedule = Schedule.new(:user_id=>user.id, :course_id=>course.id, :semester=>"Spring", :year=>2016, :complete=>"No")
+    schedule = Schedule.new(:user_id=>user.id, :course_id=>course.id, :semester=>"Spring", :year=>2016, :complete=>"In Progress")
     respond_to do |format|
       if schedule.valid?
         if schedule.save

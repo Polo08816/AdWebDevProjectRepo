@@ -16,5 +16,10 @@
   <dd><%= @course.prerequisite_course_number %></dd>
 </dl>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-            users_path, :class => 'btn btn-default'  %>
+<% if User.where(id: current_user.id, user_type: "Admin").any? %>
+    <%= link_to t('.back', :default => t("helpers.links.back")),
+                "/users/schedule", :class => 'btn btn-default'  %>
+<% else %>
+    <%= link_to t('.back', :default => t("helpers.links.back")),
+                users_path, :class => 'btn btn-default'  %>
+<% end %>
