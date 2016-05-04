@@ -56,7 +56,7 @@
   <% @course.each do |course| %>
       <tr>
         <td><%= link_to course.course_name, controller: "courses", action: "schedule_course", id: schedule.course_id %></td>
-        <%#= link_to course.id, course_path(course) %>
+        <td><%#= link_to course.id, course_path(course) %></td>
         <td><%= course.description %></td>
         <td><%= course.course_number %></td>
         <td><%= course.department %></td>
