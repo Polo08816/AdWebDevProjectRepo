@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
+  before_action :set_user, only: [:show, :edit, :update, :schedule, :destroy]
 
   # GET /courses
   # GET /courses.json
