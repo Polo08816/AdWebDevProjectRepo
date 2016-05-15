@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'users/schedule'
   get 'users/instructor_index'
   get 'users/instructor_update'
+  get 'users/schedule_remove'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
   resources :courses, :users

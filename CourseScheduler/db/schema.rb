@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160512210132) do
+ActiveRecord::Schema.define(version: 20160514203208) do
 
   create_table "courses", force: :cascade do |t|
     t.text     "course_name"
@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 20160512210132) do
   add_index "courses", ["course_number", "department"], name: "index_courses_on_course_number_and_department", unique: true
 
   create_table "schedules", id: false, force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "course_id"
+    t.integer  "users_id"
+    t.integer  "courses_id"
     t.string   "semester"
     t.integer  "year"
     t.string   "complete"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20160512210132) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "schedules", ["user_id", "course_id", "semester", "year"], name: "index_schedules_on_user_id_and_course_id_and_semester_and_year", unique: true
+  add_index "schedules", ["users_id", "courses_id", "semester", "year"], name: "index_schedule_name", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -57,8 +57,7 @@ ActiveRecord::Schema.define(version: 20160512210132) do
     t.string   "last_name"
     t.string   "street_address"
     t.string   "phone_number"
-    t.string   "user_type"
-    t.integer  "roles_mask"
+    t.integer  "roles_mask",             default: 1
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

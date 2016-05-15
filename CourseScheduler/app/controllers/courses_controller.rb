@@ -19,11 +19,6 @@ class CoursesController < ApplicationController
     @schedule = Schedule.all
   end
 
-  # GET /courses/1
-  # GET /courses/1.json
-  def schedule_remove
-  end
-
   # GET /courses/new
   def new
     @course = Course.new

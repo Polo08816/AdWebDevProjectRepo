@@ -48,11 +48,13 @@
         <a class="navbar-brand" href="/users">CourseScheduler</a>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
-            <li><%= link_to "My Account", "/users/index"  %></li>
             <% if current_user != nil %>
-                <% if !User.where(id: current_user.id, user_type: "Instructor").any? %>
+                <li><%= link_to "My Account", :controller=>"users", :action=>"show", :id=>current_user.id%></li>
+                <% if !User.where(id: current_user.id, roles_mask: 1).any? %>
                     <li><%= link_to "Schedule", "/users/schedule" %></li>
-                    <li><%= link_to "Courses", "/courses"  %></li>
+                    <% if !User.where(id: current_user.id, roles_mask: 0).any? %>
+                        <li><%= link_to "Courses", "/courses"  %></li>
+                    <% end %>
                 <% end %>
             <% end %>
             <li>

@@ -4,7 +4,7 @@
 <td><%= fparam.department %></td>
 <td><%= fparam.prerequisite_course_number %></td>
 <% if fparam.instructor_id != nil %>
-    <% if User.where(id: fparam.instructor_id, user_type: "Instructor").any? %>
+    <% if User.where(id: fparam.instructor_id, roles_mask: 1).any? %>
         <td><%= User.find(fparam.instructor_id).last_name %>, <%=User.find(fparam.instructor_id).first_name %></td>
     <% else %>
         <td><%= "Invalid" %></td>

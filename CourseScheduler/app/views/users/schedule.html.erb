@@ -17,11 +17,13 @@
   </tbody>
 </table>
 
-<% if !User.where(id: current_user.id, user_type: "Admin").any? %>
+<% if (current_user.roles_mask == 0) %>
     <div>
       <%= link_to "Add Class", '/courses/schedule_add', method: :schedule_add,
           :class => 'btn btn-default btn-xs'  %>
-      <%= link_to "Remove Class", '/courses/schedule_remove', method: :schedule_remove,
-          :class => 'btn btn-default btn-xs'  %>
     </div>
 <% end %>
+
+<br></br>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+            users_path, :class => 'btn btn-default'  %>

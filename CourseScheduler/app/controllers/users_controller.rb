@@ -5,16 +5,15 @@ class UsersController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    tmp_user = User.find(current_user.id)
-    if (tmp_user.user_type == "Admin")
+    if (current_user.roles_mask == 2)
       @user = User.all
       @course = Course.all
       redirect_to "/users/admin_index"
 #      @schedule = Schedule.where(user_id: current_user.id, complete: "In Progress")
     else
       @user = User.where(id: current_user.id)
-      @schedule = Schedule.where(user_id: current_user.id, complete: "In Progress")
-      if (tmp_user.user_type == "Instructor")
+      @schedule = Schedule.where(users_id: current_user.id, complete: "In Progress")
+      if (current_user.roles_mask == 1)
         redirect_to "/users/instructor_index"
       end
     end
@@ -39,22 +38,32 @@ class UsersController < ApplicationController
   end
 
   def schedule
-    tmp_user = User.find(current_user.id)
-    if (tmp_user.user_type == "Admin")
+    if (current_user.roles_mask == 2)
       @schedule = Schedule.all
     else
-      @schedule = Schedule.where(user_id: current_user.id, complete: "In Progress")
+      @schedule = Schedule.where(users_id: current_user.id, complete: "In Progress")
     end
   end
+
+  # GET /users/1
+  # GET /users/1.json
+  def schedule_remove
+    @schedule = Schedule.where(users_id: params[:users_id], courses_id: params[:courses_id], semester: params[:semester], year: params[:year]).delete_all
+    respond_to do |format|
+      format.html { redirect_to users_url, notice: 'Course was successfully removed from schedule.' }
+    end
+  end
+
+
   # GET /users/1
   # GET /users/1.json
   def show
   end
 
   def add_course
-    course = Course.find(params[:id])
-    user = current_user
-    schedule = Schedule.new(:user_id=>user.id, :course_id=>course.id, :semester=>"Spring", :year=>2016, :complete=>"In Progress")
+    course = Course.find(params[:course_id])
+    @user = current_user
+    schedule = Schedule.new(:users_id=>current_user.id, :courses_id=>course.id, :semester=>"Spring", :year=>2016, :complete=>"In Progress")
     respond_to do |format|
       if schedule.valid?
         if schedule.save
@@ -85,6 +94,17 @@ class UsersController < ApplicationController
     end
   end
 
+  # DELETE /users/1
+  # DELETE /users/1.json
+  def destroy
+    user_tmp = User.find(params[:id])
+    user_tmp.destroy
+    respond_to do |format|
+      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_user
@@ -93,6 +113,6 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:email, :first_name, :last_name, :street_address, :phone_number, :user_type)
+    params.require(:user).permit(:email, :first_name, :last_name, :street_address, :phone_number, :roles_mask)
   end
 end

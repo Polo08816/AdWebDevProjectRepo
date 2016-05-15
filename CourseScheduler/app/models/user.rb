@@ -33,6 +33,6 @@ ROLES = %i[instructor student]
 #  validates :phoneNum, numericality: {greater_than_or_equal_to: 100000000}
 #  validates :phoneNum, numericality: {less_than_or_equal_to: 9999999999}
 
-  TYPES = ['Student', 'Instructor']
+  TYPES = ['Student', 'Instructor', 'Admin']
   COMPLETED = ['Pass', 'Fail', "In Progress"]
 end

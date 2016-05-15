@@ -4,7 +4,7 @@
 </div>
 
 <div class="page-header">
-  <h2><%=link_to t('.title', :default => "My Account"), "/users/index" %></h2>
+  <h2><%=link_to t('.title', :default => "My Account"), :controller=>"users", :action=>"show", :id=>current_user.id %></h2>
 </div>
 <table class="table table-striped">
   <thead>
@@ -22,7 +22,7 @@
 </table>
 
 <div class="page-header">
-  <h2><%=t '.title', :default => "Courses" %></h2>
+  <h2><%=link_to t('.title', :default => "Courses"), "/courses" %></h2>
 </div>
 
 <div id="instructor">

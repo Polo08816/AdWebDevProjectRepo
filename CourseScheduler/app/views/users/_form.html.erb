@@ -15,13 +15,13 @@
         </div>
     <% end %>
 
-    <% if User.where(id: current_user.id, user_type: "Admin").any? %>
+    <% if current_user.has_role? :admin %>
         <div class="form-group">
-          <%= f.label :user_type, :class => 'control-label col-lg-2' %>
+          <%= f.label :roles_mask, :class => 'control-label col-lg-2' %>
           <div class="col-lg-10">
-            <%= f.collection_select :user_type, User::TYPES, :to_s, :to_s, :include_blank =>false, :class => 'control-label col-lg-2' %>
+            <%= f.collection_select :roles_mask, User::TYPES, :to_s, :to_s, :include_blank =>false, :class => 'control-label col-lg-2' %>
           </div>
-          <%=f.error_span(:user_type) %>
+          <%=f.error_span(:roles_mask) %>
         </div>
     <% end %>
     <div class="form-group">
