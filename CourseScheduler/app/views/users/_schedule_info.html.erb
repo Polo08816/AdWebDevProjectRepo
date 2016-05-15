@@ -8,7 +8,8 @@
 <td>
   <% if (current_user.roles_mask == 2) %>
     <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                  "/courses/schedule_edit", :class => 'btn btn-default btn-xs' %>
+                { :controller => "schedules", :action => "edit", :id => fparam.id },
+                :class => 'btn btn-default btn-xs' %>
   <% end %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               users_schedule_remove_path(users_id: fparam.users_id, courses_id: fparam.courses_id, semester: fparam.semester, year: fparam.year),

@@ -8,9 +8,10 @@ Rails.application.routes.draw do
   get 'users/instructor_index'
   get 'users/instructor_update'
   get 'users/schedule_remove'
+  get 'schedules/edit'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
-  resources :courses, :users
+  resources :courses, :users, :schedules
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 #  root 'courses#index'
