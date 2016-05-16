@@ -52,9 +52,9 @@
                 <li><%= link_to "My Account", :controller=>"users", :action=>"show", :id=>current_user.id%></li>
                 <% if !User.where(id: current_user.id, roles_mask: 1).any? %>
                     <li><%= link_to "Schedule", "/users/schedule" %></li>
-                    <% if !User.where(id: current_user.id, roles_mask: 0).any? %>
-                        <li><%= link_to "Courses", "/courses"  %></li>
-                    <% end %>
+                <% end %>
+                <% if !User.where(id: current_user.id, roles_mask: 0).any? %>
+                    <li><%= link_to "Courses", "/courses"  %></li>
                 <% end %>
             <% end %>
             <li>

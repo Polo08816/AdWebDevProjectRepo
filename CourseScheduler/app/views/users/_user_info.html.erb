@@ -1,9 +1,9 @@
-<% if (fparam.roles_mask == 0) %>
-    <td><%= "Student" %></td>
+<% if (fparam.roles_mask == 2) %>
+    <td><%= "Admin" %></td>
 <% elsif (fparam.roles_mask == 1)%>
     <td><%= "Instructor" %></td>
 <% else %>
-    <td><%= "Admin" %></td>
+    <td><%= "Student" %></td>
 <% end %>
       <td><%= fparam.email %></td>
       <td><%= fparam.first_name %></td>

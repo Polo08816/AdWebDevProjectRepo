@@ -17,6 +17,7 @@ class Ability
      can :instructor_index, User
      can :instructor_update, User
      can :show, User
+     can :update, User
    else
      can :manage, User
      can :add_course, User

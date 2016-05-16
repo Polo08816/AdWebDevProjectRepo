@@ -4,6 +4,26 @@
 </div>
 
 <div class="page-header">
+  <h2><%=link_to t('.title', :default => "My Account"), :controller=>"users", :action=>"show", :id=>current_user.id %></h2>
+</div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th><%= model_class.human_attribute_name(:id) %></th>
+    <%= render :partial => "users/user_model", locals: {fparam: model_class} %>
+  </tr>
+  </thead>
+  <tbody>
+  <% User.where(id: current_user.id).each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <%= render :partial => "user_info", locals: {fparam: user} %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<div class="page-header">
   <h2><%=t '.title', :default => "Users" %></h2>
 </div>
 <table class="table table-striped">
@@ -14,7 +34,7 @@
   </tr>
   </thead>
   <tbody>
-  <% User.all.each do |user| %>
+  <% User.where.not(id: current_user.id).each do |user| %>
       <tr>
         <td><%= user.id %></td>
         <%= render :partial => "user_info", locals: {fparam: user} %>
@@ -43,7 +63,7 @@
 <div>
   <%= link_to t('.new', :default => t("helpers.links.new")),
               new_course_path,
-              :class => 'btn btn-primary' %>
+              :class => 'btn btn-xs btn-primary' %>
 </div>
 
 <div class="page-header">
