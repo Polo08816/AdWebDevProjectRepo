@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get 'users/instructor_update'
   get 'users/schedule_remove'
   get 'schedules/edit'
+  get 'schedules/add'
+  get 'schedules/new'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
   resources :courses, :users, :schedules

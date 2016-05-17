@@ -36,8 +36,6 @@ ActiveRecord::Schema.define(version: 20160515153002) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "schedules", ["users_id", "courses_id", "semester", "year"], name: "index_schedule_name", unique: true
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false

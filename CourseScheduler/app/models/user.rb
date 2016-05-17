@@ -33,6 +33,24 @@ ROLES = %i[instructor student]
 #  validates :phoneNum, numericality: {greater_than_or_equal_to: 100000000}
 #  validates :phoneNum, numericality: {less_than_or_equal_to: 9999999999}
 
+  def print_role(roles_mask)
+    return User::TYPES[roles_mask]
+  end
+
+  def print_types()
+    index = 0
+    String tmp_string = ""
+    while index <  User::TYPES.length
+      if(index > 0)
+        tmp_string += "; "
+      end
+      tmp_string += "#{index}=#{User::TYPES[index]}"
+      index += 1
+    end
+    return tmp_string
+  end
+
+  TYPE_ROLES = [0, 1, 2]
   TYPES = ['Student', 'Instructor', 'Admin']
-  COMPLETED = ['Pass', 'Fail', "In Progress"]
+  COMPLETED = ['Pass', 'Fail', 'In Progress']
 end

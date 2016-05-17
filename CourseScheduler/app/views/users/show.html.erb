@@ -4,16 +4,20 @@
 </div>
 
 <dl class="dl-horizontal">
+  <% if current_user.roles_mask == 2 %>
+      <dt><strong><%= "User type" %>:</strong></dt>
+      <dd><%= @user.print_role(@user.roles_mask) %></dd>
+<% end %>
   <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
-  <dd><%= current_user.email %></dd>
+  <dd><%= @user.email %></dd>
   <dt><strong><%= model_class.human_attribute_name(:first_name) %>:</strong></dt>
-  <dd><%= current_user.first_name %></dd>
+  <dd><%= @user.first_name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:last_name) %>:</strong></dt>
-  <dd><%= current_user.last_name %></dd>
+  <dd><%= @user.last_name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:street_address) %>:</strong></dt>
-  <dd><%= current_user.street_address %></dd>
+  <dd><%= @user.street_address %></dd>
   <dt><strong><%= model_class.human_attribute_name(:phone_number) %>:</strong></dt>
-  <dd><%= current_user.phone_number %></dd>
+  <dd><%= @user.phone_number %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

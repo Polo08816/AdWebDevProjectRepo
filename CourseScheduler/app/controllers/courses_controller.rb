@@ -38,12 +38,17 @@ class CoursesController < ApplicationController
     @course = Course.new(course_params)
 
     respond_to do |format|
-      if @course.save
-        format.html { redirect_to @course, notice: 'Course was successfully created.' }
-        format.json { render :show, status: :created, location: @course }
-      else
-        format.html { render :new }
+      if (@course.courses_number == nil)
+        format.html { redirect_to @course, alert: 'Course number missing.' }
         format.json { render json: @course.errors, status: :unprocessable_entity }
+      else
+        if @course.save
+          format.html { redirect_to @course, notice: 'Course was successfully created.' }
+          format.json { render :show, status: :created, location: @course }
+        else
+          format.html { render :new }
+          format.json { render json: @course.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

@@ -7,7 +7,7 @@
           </div>
           <div class="panel-body">
             <ul>
-              <% @users.errors.full_messages.each do |msg| %>
+              <% @user.errors.full_messages.each do |msg| %>
                   <li><%= msg %></li>
               <% end %>
             </ul>
@@ -15,11 +15,12 @@
         </div>
     <% end %>
 
-    <% if current_user.has_role? :admin %>
+    <% if (current_user.roles_mask == 2) %>
         <div class="form-group">
           <%= f.label :roles_mask, :class => 'control-label col-lg-2' %>
           <div class="col-lg-10">
-            <%= f.collection_select :roles_mask, User::TYPES, :to_s, :to_s, :include_blank =>false, :class => 'control-label col-lg-2' %>
+            <%= f.collection_select :roles_mask, User::TYPE_ROLES, :to_i, :to_i, :include_blank =>false, :class => 'control-label col-lg-2' %>
+            <%= @user.print_types() %>
           </div>
           <%=f.error_span(:roles_mask) %>
         </div>

@@ -17,10 +17,10 @@
   </tbody>
 </table>
 
-<% if (current_user.roles_mask == 0) %>
+<% if ((current_user.roles_mask == 0) || (current_user.roles_mask == 2))%>
     <div>
       <%= link_to "Add Class", '/courses/schedule_add', method: :schedule_add,
-          :class => 'btn btn-default btn-xs'  %>
+          :class => 'btn btn-xs btn-primary'  %>
     </div>
 <% end %>
 

@@ -10,6 +10,30 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.find(params[:id])
   end
 
+  def new
+    @schedule = Schedule.new()
+    @schedule.courses_id = params[:courses_id]
+  end
+
+  def create
+    @schedule = Schedule.new(schedule_params)
+
+    respond_to do |format|
+      if ((@schedule.courses_id == nil) || (@schedule.users_id == nil) || (@schedule.semester == nil) || (@schedule.year == nil))
+        format.html { redirect_to "/users", alert: 'Schedule information missing, could not be created.' }
+        format.json { render json: @schedule.error, status: :unprocessable_entity }
+      else
+        if @schedule.save
+          format.html { redirect_to "/users", notice: 'Schedule was successfully created.' }
+          format.json { render :show, status: :created, location: @schedule }
+        else
+          format.html { render :new }
+          format.json { render json: @schedule.errors, status: :unprocessable_entity }
+        end
+        end
+    end
+  end
+
   def show
   end
 

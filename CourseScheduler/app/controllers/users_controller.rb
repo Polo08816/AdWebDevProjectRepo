@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
-  before_action :set_user, only: [:show, :edit, :update, :schedule, :destroy]
+  before_action :set_user, only: [:edit, :schedule, :destroy]
 
   # GET /courses
   # GET /courses.json
@@ -35,6 +35,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def schedule
@@ -64,39 +65,43 @@ class UsersController < ApplicationController
     course = Course.find(params[:course_id])
     @user = current_user
 
-    schedule = Schedule.new(:users_id=>current_user.id, :courses_id=>course.id, :semester=>"Spring", :year=>2016, :complete=>"In Progress")
+    if (@user.roles_mask == 2)
+      redirect_to schedules_new_path(:courses_id => course.id)
+    else
+      schedule = Schedule.new(:users_id=>current_user.id, :courses_id=>course.id, :semester=>"Spring", :year=>2016, :complete=>"In Progress")
 
-    respond_to do |format|
-      continue_processing = true
-      if(!schedule.valid?)
-        format.html { redirect_to users_url, alert: 'Course could not be added to schedule (invalid)' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-        continue_processing = false
-      end
-
-      if (course.prerequisite_course_number != nil && continue_processing)
-        tmp_string = check_prereq(course)
-        if (tmp_string != nil)
-          format.html { redirect_to users_url, alert: tmp_string }
+      respond_to do |format|
+        continue_processing = true
+        if(!schedule.valid?)
+          format.html { redirect_to users_url, alert: 'Course could not be added to schedule (invalid)' }
           format.json { render json: @user.errors, status: :unprocessable_entity }
           continue_processing = false
         end
-      end
 
-      if(continue_processing)
-        tmp_string_2 = check_schedule(schedule)
-        if (tmp_string_2 != nil)
-          format.html { redirect_to users_url, alert: tmp_string_2 }
-          format.json { render json: @user.errors, status: :unprocessable_entity }
-          continue_processing = false
-        end
-        if(continue_processing)
-          if schedule.save
-            format.html { redirect_to users_url, notice: 'Course was successfully added to schedule.' }
-            format.json { render :show, status: :ok, location: @user }
-          else
-            format.html { redirect_to users_url, alert: 'Course could not be added to schedule' }
+        if (course.prerequisite_course_number != nil && continue_processing)
+          tmp_string = check_prereq(course)
+          if (tmp_string != nil)
+            format.html { redirect_to users_url, alert: tmp_string }
             format.json { render json: @user.errors, status: :unprocessable_entity }
+            continue_processing = false
+          end
+        end
+
+        if(continue_processing)
+          tmp_string_2 = check_schedule(schedule)
+          if (tmp_string_2 != nil)
+            format.html { redirect_to users_url, alert: tmp_string_2 }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+            continue_processing = false
+          end
+          if(continue_processing)
+            if schedule.save
+              format.html { redirect_to users_url, notice: 'Course was successfully added to schedule.' }
+              format.json { render :show, status: :ok, location: @user }
+            else
+              format.html { redirect_to users_url, alert: 'Course could not be added to schedule' }
+              format.json { render json: @user.errors, status: :unprocessable_entity }
+            end
           end
         end
       end
