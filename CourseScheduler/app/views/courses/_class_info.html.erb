@@ -3,4 +3,4 @@
 <td><%= fparam.course_number %></td>
 <td><%= fparam.department %></td>
 <td><%= fparam.prerequisite_course_number %></td>
-<td><%= Schedule.where(courses_id: fparam.id).size %></td>
+<td><%= Schedule.where(courses_id: fparam.id, complete: "In Progress").size %></td>
