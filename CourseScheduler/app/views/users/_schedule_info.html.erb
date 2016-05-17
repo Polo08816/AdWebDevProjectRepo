@@ -1,4 +1,4 @@
-<% if (current_user.roles_mask == 2) %>
+<% if (current_user.roles_mask == 3) %>
     <td><%= fparam.users_id %></td>
 <% end %>
 <td><%= link_to Course.find(fparam.courses_id).course_name, controller: "courses", action: "schedule_course", id: fparam.courses_id %></td>
@@ -6,7 +6,7 @@
 <td><%= fparam.year %></td>
 <td><%= fparam.complete %></td>
 <td>
-  <% if (current_user.roles_mask == 2) %>
+  <% if (current_user.roles_mask == 3) %>
     <%= link_to t('.edit', :default => t("helpers.links.edit")),
                 { :controller => "schedules", :action => "edit", :id => fparam.id },
                 :class => 'btn btn-default btn-xs' %>

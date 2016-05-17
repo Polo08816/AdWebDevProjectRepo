@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
       user.password = Devise.friendly_token[0,20]
     end
   end
-ROLES = %i[instructor student]
+ROLES = %i[student instructor]
 
  def roles=(roles)
    roles = [*roles].map { |r| r.to_sym }
@@ -34,7 +34,7 @@ ROLES = %i[instructor student]
 #  validates :phoneNum, numericality: {less_than_or_equal_to: 9999999999}
 
   def print_role(roles_mask)
-    return User::TYPES[roles_mask]
+    return User::TYPES[roles_mask-1]
   end
 
   def print_types()
@@ -44,13 +44,13 @@ ROLES = %i[instructor student]
       if(index > 0)
         tmp_string += "; "
       end
-      tmp_string += "#{index}=#{User::TYPES[index]}"
+      tmp_string += "#{index+1}=#{User::TYPES[index]}"
       index += 1
     end
     return tmp_string
   end
 
-  TYPE_ROLES = [0, 1, 2]
+  TYPE_ROLES = [1, 2, 3]
   TYPES = ['Student', 'Instructor', 'Admin']
   COMPLETED = ['Pass', 'Fail', 'In Progress']
 end

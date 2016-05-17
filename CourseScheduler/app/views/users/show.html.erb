@@ -4,7 +4,7 @@
 </div>
 
 <dl class="dl-horizontal">
-  <% if current_user.roles_mask == 2 %>
+  <% if current_user.roles_mask == 3 %>
       <dt><strong><%= "User type" %>:</strong></dt>
       <dd><%= @user.print_role(@user.roles_mask) %></dd>
 <% end %>

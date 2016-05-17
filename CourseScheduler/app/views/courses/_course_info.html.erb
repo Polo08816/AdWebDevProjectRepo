@@ -4,7 +4,7 @@
 <td><%= fparam.department %></td>
 <td><%= fparam.prerequisite_course_number %></td>
 <% if fparam.instructor_id != nil %>
-    <% if User.where(id: fparam.instructor_id, roles_mask: 1).any? %>
+    <% if User.where(id: fparam.instructor_id, roles_mask: 2).any? %>
         <% if (User.find(fparam.instructor_id).last_name != "") %>
             <td><%= User.find(fparam.instructor_id).last_name %>, <%=User.find(fparam.instructor_id).first_name %></td>
         <% else %>
@@ -19,7 +19,7 @@
 <td>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_course_path(fparam), :class => 'btn btn-default btn-xs' %>
-  <% if User.where(id: current_user.id, roles_mask: 2).any? %>
+  <% if User.where(id: current_user.id, roles_mask: 3).any? %>
       <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                   course_path(fparam),
                   :method => :delete,

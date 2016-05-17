@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    if (current_user.roles_mask == 2)
+    if (current_user.roles_mask == 3)
       @user = User.all
       @course = Course.all
       redirect_to "/users/admin_index"
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     else
       @user = User.where(id: current_user.id)
       @schedule = Schedule.where(users_id: current_user.id, complete: "In Progress")
-      if (current_user.roles_mask == 1)
+      if (current_user.roles_mask == 2)
         redirect_to "/users/instructor_index"
       end
     end
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
   end
 
   def schedule
-    if (current_user.roles_mask == 2)
+    if (current_user.roles_mask == 3)
       @schedule = Schedule.all
     else
       @schedule = Schedule.where(users_id: current_user.id, complete: "In Progress")
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
     course = Course.find(params[:course_id])
     @user = current_user
 
-    if (@user.roles_mask == 2)
+    if (@user.roles_mask == 3)
       redirect_to schedules_new_path(:courses_id => course.id)
     else
       schedule = Schedule.new(:users_id=>current_user.id, :courses_id=>course.id, :semester=>"Spring", :year=>2016, :complete=>"In Progress")

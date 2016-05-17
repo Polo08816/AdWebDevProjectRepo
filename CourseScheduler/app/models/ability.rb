@@ -3,10 +3,10 @@ class Ability
 
   def initialize(user)
      user ||= User.new
-   if (user.roles_mask == 2)
+   if (user.roles_mask == 3)
      can :manage, :all
 #   elsif user.has_role? :instructor
-   elsif (user.roles_mask == 1)
+   elsif (user.roles_mask == 2)
      can :manage, Course # author can create status
      # author can update status
      # can :destroy, Status # #uncomment this line, author can destroy status

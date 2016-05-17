@@ -16,7 +16,7 @@
   <dd><%= @course.prerequisite_course_number %></dd>
 </dl>
 
-<% if User.where(id: current_user.id, roles_mask: 2).any? %>
+<% if User.where(id: current_user.id, roles_mask: 3).any? %>
     <%= link_to t('.back', :default => t("helpers.links.back")),
                 "/users/schedule", :class => 'btn btn-default'  %>
 <% else %>
