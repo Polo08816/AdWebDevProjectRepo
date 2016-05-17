@@ -63,9 +63,27 @@ class UsersController < ApplicationController
   def add_course
     course = Course.find(params[:course_id])
     @user = current_user
+
     schedule = Schedule.new(:users_id=>current_user.id, :courses_id=>course.id, :semester=>"Spring", :year=>2016, :complete=>"In Progress")
+
     respond_to do |format|
-      if schedule.valid?
+
+      if (course.prerequisite_course_number != nil && schedule.valid?)
+        courseprereq = Course.find_by(:course_number => course.prerequisite_course_number)
+        prerequisite = Schedule.where(:users_id => current_user.id, :courses_id => courseprereq.id, :complete => "Pass")
+        if prerequisite.any?
+          if schedule.save
+            format.html { redirect_to users_url, notice: 'Course was successfully added to schedule.' }
+            format.json { render :show, status: :ok, location: @user }
+          else
+            format.html { redirect_to users_url, alert: 'Course could not be added to schedule' }
+            format.json { render json: @user.errors, status: :unprocessable_entity }
+          end
+        else
+          format.html { redirect_to users_url, alert: 'Prerequisite course has not been completed.' }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+      elsif schedule.valid?
         if schedule.save
           format.html { redirect_to users_url, notice: 'Course was successfully added to schedule.' }
           format.json { render :show, status: :ok, location: @user }
